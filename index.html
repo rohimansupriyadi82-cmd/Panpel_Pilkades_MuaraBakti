@@ -7,73 +7,126 @@
     <!-- Tailwind CSS untuk Desain Modern -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts untuk Tipografi yang Rapi -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; }
+        
+        /* Animasi masuk yang super smooth dan estetik */
+        @keyframes premiumFadeIn {
+            from { opacity: 0; transform: translateY(16px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-fadeIn {
+            animation: premiumFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Efek kilau bergerak pada tombol saat hover */
+        .btn-shimmer {
+            background-size: 200% auto;
+            transition: all 0.4s ease;
+        }
+        .btn-shimmer:hover {
+            background-position: right center;
+        }
+
+        /* Memastikan icon kalender bawaan browser menjadi putih (terang) agar mudah dilihat */
+        input[type="date"] {
+            color-scheme: dark;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col justify-between text-slate-800">
+<body class="bg-[#0b1224] min-h-screen flex flex-col justify-between text-slate-100 relative overflow-x-hidden antialiased">
 
-    <!-- BAGIAN ATAS: LOGO & HEADER -->
-    <header class="w-full text-center pt-8 px-4 flex flex-col items-center">
-        <!-- Logo dari Link yang Diberikan -->
-        <div class="bg-white p-3 rounded-full shadow-md mb-4 max-w-[120px] max-h-[120px] flex items-center justify-center overflow-hidden border border-slate-100">
-            <img src="https://cdn.phototourl.com/free/2026-06-11-c4f86090-2882-4167-94b6-dd64851fcf05.jpg" 
+    <!-- GAMBAR LATAR BELAKANG PEMKAB BEKASI (Transparan Halus & Estetik) -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.12] pointer-events-none -z-20" 
+         style="background-image: url('https://cdn.phototourl.com/free/2026-06-11-b0bce837-4dca-43d3-b423-a81ba3127490.jpg');">
+    </div>
+
+    <!-- Ornamen Seni Cahaya Latar Belakang (Ambient Glow FX) -->
+    <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] bg-emerald-500/10 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none -z-10"></div>
+    <div class="absolute bottom-[15%] left-[-5%] w-[250px] sm:w-[450px] h-[250px] sm:h-[450px] bg-teal-500/5 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none -z-10"></div>
+
+    <!-- BAGIAN ATAS: HEADER UTAMA & LOGO -->
+    <header class="w-full text-center pt-8 sm:pt-12 px-4 flex flex-col items-center relative z-10">
+        <!-- LOGO POSISI DI ATAS TULISAN (Tanpa Bingkai, Rapi & Clean) -->
+        <div class="mb-5 w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center transition-all duration-300 hover:scale-105 drop-shadow-[0_10px_25px_rgba(16,185,129,0.3)]">
+            <img src="https://cdn.phototourl.com/free/2026-06-11-19435bff-8a0f-4040-aeff-9140b456af0a.png" 
                  alt="Logo Pilkades Muara Bakti" 
-                 class="w-full h-auto object-contain"
-                 onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=LOGO';">
+                 class="w-full h-full object-contain"
+                 onerror="this.onerror=null; this.src='https://placehold.co/150x150?text=LOGO';">
         </div>
-        <h1 class="text-2xl md:text-3xl font-bold text-emerald-700 tracking-tight">PANITIA PILKADES MUARA BAKTI</h1>
-        <p class="text-sm md:text-base text-slate-500 font-medium mt-1">Kecamatan Babelan, Kabupaten Bekasi</p>
+
+        <!-- Judul Utama -->
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-emerald-400 max-w-md sm:max-w-2xl leading-tight px-2 drop-shadow-md">
+            PANITIA PILKADES MUARA BAKTI
+        </h1>
+        <p class="text-[10px] sm:text-xs text-emerald-400 font-extrabold uppercase tracking-widest mt-3 px-4 py-1.5 bg-emerald-500/15 rounded-full border border-emerald-500/30 inline-block backdrop-blur-sm shadow-sm">
+            Kecamatan Babelan, Kabupaten Bekasi
+        </p>
     </header>
 
     <!-- BAGIAN UTAMA: DASHBOARD HITUNG USIA -->
-    <main class="flex-grow flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-xl border border-slate-100 p-6 md:p-8 transition-all">
+    <main class="flex-grow flex items-center justify-center p-4 relative z-10 my-6 sm:my-8">
+        <!-- Card Transparan Halus dengan Kontras Tinggi (Isian Lebih Jelas) -->
+        <div class="bg-slate-900/85 backdrop-blur-xl w-full max-w-md rounded-[32px] shadow-[0_30px_70px_-15px_rgba(0,0,0,0.7),_0_0_50px_rgba(16,185,129,0.08)] border border-slate-700/60 p-6 sm:p-8 transition-all duration-500 hover:border-emerald-500/30">
             
-            <!-- Info Hari Pelaksanaan -->
-            <div class="bg-emerald-50 rounded-xl p-4 mb-6 border border-emerald-100 text-center">
-                <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider block mb-1">Hari Pelaksanaan Pilkades</span>
-                <span class="text-base font-semibold text-emerald-900 block">Minggu, 20 September 2026</span>
+            <!-- Info Banner Panduan -->
+            <div class="bg-gradient-to-r from-emerald-950/60 via-slate-950/90 to-teal-950/60 rounded-2xl p-4 mb-6 border border-emerald-500/20 text-center shadow-inner relative overflow-hidden">
+                <div class="absolute -top-10 -left-10 w-20 h-20 bg-emerald-500/5 rounded-full blur-xl"></div>
+                <span class="text-[10px] sm:text-xs font-extrabold text-emerald-400 uppercase tracking-widest block mb-1">Pengecekan Syarat Usia</span>
+                <span class="text-sm sm:text-base font-bold text-white block leading-relaxed drop-shadow-md">Silakan Masukkan Tanggal Lahir Anda</span>
             </div>
 
-            <!-- Form Input -->
-            <div class="space-y-4">
+            <!-- Form Input (Dibuat Sangat Kontras & Jelas) -->
+            <div class="space-y-5 sm:space-y-6">
                 <div>
-                    <label for="birthdate" class="block text-sm font-semibold text-slate-700 mb-2">Masukkan Tanggal Lahir Warga :</label>
+                    <label for="birthdate" class="block text-xs sm:text-sm font-bold uppercase text-slate-200 tracking-wider mb-2.5 pl-1 drop-shadow-sm">
+                        Masukkan Tanggal Lahir Warga :
+                    </label>
+                    <!-- Input dengan background pekat agar isian tanggal super jelas terlihat -->
                     <input type="date" id="birthdate" 
-                           class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-base font-medium placeholder-slate-400 shadow-sm">
+                           class="w-full px-4 py-3.5 sm:py-4 rounded-xl border-2 border-slate-600 hover:border-emerald-500 focus:ring-4 focus:ring-emerald-500/30 focus:border-emerald-400 outline-none transition-all text-base sm:text-lg font-bold text-white shadow-md bg-slate-950 cursor-pointer">
                 </div>
 
+                <!-- Tombol Hitung -->
                 <button onclick="hitungUsia()" 
-                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-md hover:shadow-lg transition-all transform active:scale-[0.98] mt-2 tracking-wide text-center block">
+                        class="btn-shimmer w-full bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600 text-white font-bold py-4 px-4 rounded-xl shadow-lg shadow-emerald-950/50 hover:shadow-emerald-500/40 transition-all transform active:scale-[0.99] tracking-widest text-center block text-xs sm:text-sm uppercase">
                     HITUNG USIA SEKARANG
                 </button>
             </div>
 
-            <!-- HASIL PERHITUNGAN (Hidden by default, muncul saat dihitung) -->
-            <div id="result-box" class="hidden mt-8 pt-6 border-t border-slate-100 animate-fadeIn">
-                <h3 class="text-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Hasil Analisis Usia pada 20 September 2026</h3>
+            <!-- HASIL PERHITUNGAN -->
+            <div id="result-box" class="hidden mt-6 sm:mt-8 pt-6 border-t border-slate-700/80 animate-fadeIn">
+                <h3 class="text-center text-[10px] sm:text-xs font-extrabold text-slate-300 uppercase tracking-widest mb-4">Hasil Analisis Usia pada 20 September 2026</h3>
                 
-                <!-- Grid Angka Usia -->
+                <!-- Grid Angka Usia Kreatif -->
                 <div class="grid grid-cols-3 gap-3 text-center mb-6">
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <span id="res-years" class="block text-2xl md:text-3xl font-extrabold text-emerald-600">0</span>
-                        <span class="text-[11px] font-bold text-slate-500 uppercase">Tahun</span>
+                    <div class="bg-gradient-to-b from-slate-950 to-slate-900/90 p-3 sm:p-4 rounded-2xl border border-slate-700 shadow-inner relative group transition-all duration-300">
+                        <span id="res-years" class="block text-2xl sm:text-3xl font-black text-emerald-400 tracking-tight drop-shadow-[0_2px_10px_rgba(52,211,153,0.3)]">0</span>
+                        <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider mt-1 block">Tahun</span>
                     </div>
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <span id="res-months" class="block text-2xl md:text-3xl font-extrabold text-emerald-600">0</span>
-                        <span class="text-[11px] font-bold text-slate-500 uppercase">Bulan</span>
+                    <div class="bg-gradient-to-b from-slate-950 to-slate-900/90 p-3 sm:p-4 rounded-2xl border border-slate-700 shadow-inner relative group transition-all duration-300">
+                        <span id="res-months" class="block text-2xl sm:text-3xl font-black text-emerald-400 tracking-tight drop-shadow-[0_2px_10px_rgba(52,211,153,0.3)]">0</span>
+                        <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider mt-1 block">Bulan</span>
                     </div>
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <span id="res-days" class="block text-2xl md:text-3xl font-extrabold text-emerald-600">0</span>
-                        <span class="text-[11px] font-bold text-slate-500 uppercase">Hari</span>
+                    <div class="bg-gradient-to-b from-slate-950 to-slate-900/90 p-3 sm:p-4 rounded-2xl border border-slate-700 shadow-inner relative group transition-all duration-300">
+                        <span id="res-days" class="block text-2xl sm:text-3xl font-black text-emerald-400 tracking-tight drop-shadow-[0_2px_10px_rgba(52,211,153,0.3)]">0</span>
+                        <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider mt-1 block">Hari</span>
                     </div>
                 </div>
 
-                <!-- Status Kelayakan Singkat (Opsional & Informatif) -->
-                <div id="status-badge" class="text-center p-3 rounded-xl text-sm font-bold shadow-sm">
-                    <!-- Status akan diisi oleh JavaScript -->
+                <!-- Status Kelayakan -->
+                <div id="status-badge" class="text-center p-4 rounded-xl text-xs sm:text-sm font-extrabold shadow-md tracking-wider transition-all duration-300">
+                    <!-- Status otomatis terisi -->
                 </div>
             </div>
 
@@ -81,11 +134,11 @@
     </main>
 
     <!-- BAGIAN BAWAH: FOOTER COPYRIGHT -->
-    <footer class="w-full text-center py-6 px-4 bg-slate-900 text-slate-400 text-xs md:text-sm border-t border-slate-800">
-        <p>&copy; Copyright Panitia Pilkades Desa Muara Bakti Kecamatan Babelan</p>
+    <footer class="w-full text-center py-5 px-4 bg-black/75 text-slate-400 text-[10px] sm:text-xs tracking-wide border-t border-slate-900 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] relative z-10 backdrop-blur-md">
+        <p class="font-medium opacity-90">&copy; Copyright Panitia Pilkades Desa Muara Bakti Kecamatan Babelan</p>
     </footer>
 
-    <!-- LOGIKA PROGRAM (JAVASCRIPT) -->
+    <!-- LOGIKA PROGRAM (JAVASCRIPT ASLI - TETAP DIPERTAHANKAN UTUH) -->
     <script>
         function hitungUsia() {
             const birthInput = document.getElementById('birthdate').value;
@@ -110,7 +163,6 @@
             // Penyesuaian jika hari minus
             if (days < 0) {
                 months--;
-                // Ambil jumlah hari pada bulan sebelumnya
                 const prevMonth = new Date(targetDate.getFullYear(), targetDate.getMonth(), 0);
                 days += prevMonth.getDate();
             }
@@ -126,13 +178,13 @@
             document.getElementById('res-months').innerText = months;
             document.getElementById('res-days').innerText = days;
 
-            // Logika Penentuan Hak Pilih/Syarat Administrasi (Standar 17 Tahun)
+            // Logika Penentuan Hak Pilih (Standar ≥ 17 Tahun)
             const statusBadge = document.getElementById('status-badge');
             if (years >= 17) {
-                statusBadge.className = "text-center p-3 rounded-xl text-sm font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-sm";
+                statusBadge.className = "text-center p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.25)] tracking-wider uppercase";
                 statusBadge.innerHTML = "🎉 MEMENUHI SYARAT USIA PEMILIH (≥ 17 Tahun)";
             } else {
-                statusBadge.className = "text-center p-3 rounded-xl text-sm font-bold bg-rose-100 text-rose-800 border border-rose-200 shadow-sm";
+                statusBadge.className = "text-center p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm font-extrabold bg-rose-500/20 text-rose-400 border border-rose-500/40 shadow-[0_0_20px_rgba(244,63,94,0.25)] tracking-wider uppercase";
                 statusBadge.innerHTML = "⚠️ BELUM CUKUP UMUR UNTUK MEMILIH (< 17 Tahun)";
             }
 
